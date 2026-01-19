@@ -1,0 +1,241 @@
+openapi: 3.0.0
+info:
+  title: Flight Flights Microservice API
+  version: 1.0.0
+  description: Backend API documentation for Flight Management System
+
+servers:
+  - url: http://localhost:3000/api
+  - url: https://your-production-url.onrender.com/api
+
+tags:
+  - name: Info
+  - name: Airplanes
+  - name: Cities
+  - name: Flights
+
+paths:
+  /v1/info:
+    get:
+      summary: Health check / service info
+      tags: [Info]
+      responses:
+        200:
+          description: Service is up
+
+  /v1/airplanes:
+    post:
+      summary: Create a new airplane
+      tags: [Airplanes]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                modelNumber:
+                  type: string
+                capacity:
+                  type: integer
+      responses:
+        201:
+          description: Airplane created
+
+    get:
+      summary: Get all airplanes
+      tags: [Airplanes]
+      responses:
+        200:
+          description: List of airplanes
+
+  /v1/airplanes/{id}:
+    get:
+      summary: Get airplane by ID
+      tags: [Airplanes]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Airplane details
+
+    put:
+      summary: Update airplane
+      tags: [Airplanes]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                modelNumber:
+                  type: string
+                capacity:
+                  type: integer
+      responses:
+        200:
+          description: Airplane updated
+
+    delete:
+      summary: Delete airplane
+      tags: [Airplanes]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Airplane deleted
+
+  /v1/city:
+    post:
+      summary: Create city
+      tags: [Cities]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        201:
+          description: City created
+
+    get:
+      summary: Get all cities
+      tags: [Cities]
+      responses:
+        200:
+          description: List of cities
+
+  /v1/city/{id}:
+    get:
+      summary: Get city by ID
+      tags: [Cities]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: City details
+
+    put:
+      summary: Update city
+      tags: [Cities]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        200:
+          description: City updated
+
+    delete:
+      summary: Delete city
+      tags: [Cities]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: City deleted
+
+  /v1/flights:
+    post:
+      summary: Create flight
+      tags: [Flights]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flightNumber:
+                  type: string
+                airplaneId:
+                  type: integer
+                departureAirportId:
+                  type: integer
+                arrivalAirportId:
+                  type: integer
+                price:
+                  type: number
+      responses:
+        201:
+          description: Flight created
+
+    get:
+      summary: Get all flights (supports query filters)
+      tags: [Flights]
+      responses:
+        200:
+          description: List of flights
+
+  /v1/flights/{id}:
+    get:
+      summary: Get flight by ID
+      tags: [Flights]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Flight details
+
+  /v1/flights/{id}/seats:
+    patch:
+      summary: Update flight seats
+      tags: [Flights]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seats:
+                  type: integer
+      responses:
+        200:
+          description: Seats updated
