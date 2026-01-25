@@ -91,5 +91,3 @@ module.exports = {
     getAllFlights,
     getFlight
 }
-
-//flight number ?  export types , import later,interv ques myy  ,UPDATE FLIHHT LATER ALL,DATE TIME
