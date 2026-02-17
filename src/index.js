@@ -8,6 +8,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(express.text());
 
+const { connectSeatReleaseQueue } = require('./services/queue-service');
+connectSeatReleaseQueue();
+
 app.get('/', (req, res) => {
     res.send("service is up");
 });

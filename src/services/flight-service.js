@@ -88,7 +88,9 @@ async function getFlight(id) {
 
 async function updateSeats(data) {
     try {
+        console.log('service start');
         const response = await flightRepository.updateRemainingSeats(data.flightId, data.seats, data.dec);
+        console.log('service end');
         return response;
     } catch(error) {
         console.log(error);

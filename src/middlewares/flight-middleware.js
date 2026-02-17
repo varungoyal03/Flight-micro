@@ -65,6 +65,7 @@ function validateCreateRequest(req, res, next) {
 
 
 function validateUpdateSeatsRequest(req, res, next) {
+    console.log("inside validateUpdateSeatsRequest middleware");
     if(!req.body.seats) {
         ErrorResponse.message = 'Something went wrong while creating flight';
         ErrorResponse.error = new AppError(['seats not found in the incoming request in the correct form'], StatusCodes.BAD_REQUEST);
@@ -72,6 +73,7 @@ function validateUpdateSeatsRequest(req, res, next) {
                 .status(StatusCodes.BAD_REQUEST)
                 .json(ErrorResponse);
     }
+        console.log("moving out of validateUpdateSeatsRequest middleware");
     next();
 }
 

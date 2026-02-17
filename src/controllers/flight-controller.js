@@ -79,11 +79,18 @@ async function getFlight(req, res) {
 async function updateSeats(req, res) {
     try {
         console.log(req.body);
+
+        console.log('before service call');
+
+
+
         const response = await FlightService.updateSeats({
             flightId: req.params.id,
             seats: req.body.seats, 
-            dec: req.body.dec === 'true'
+            dec: req.body.dec
         });
+
+        console.log('after service call');
         SuccessResponse.data = response;
         return res
                 .status(StatusCodes.OK)
