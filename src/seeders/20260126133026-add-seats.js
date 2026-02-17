@@ -11,7 +11,7 @@ module.exports = {
     for (let row = 1; row <= 5; row++) {
       for (const col of ['A', 'B', 'C', 'D']) {
         seats.push({
-          airplaneId: 5,
+          airplaneId: 8,
           row: row,
           col: col,
           type: seatTypes[0], 

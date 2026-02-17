@@ -24,6 +24,9 @@ router.patch(
         FlightMiddlewares.validateUpdateSeatsRequest,
         FlightController.updateSeats
 );
+
+// /api/v1/flights/:id/seats GET (static seat layout for Booking Service)
+router.get('/:id/seats', FlightController.getFlightSeats);
         
 
 module.exports = router;

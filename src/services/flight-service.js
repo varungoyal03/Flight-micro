@@ -101,9 +101,23 @@ async function updateSeats(data) {
 
 
  
+const { SeatRepository } = require('../repositories');
+const seatRepository = new SeatRepository();
+
+async function getFlightSeats(flightId) {
+    // Returns all seats for the airplane assigned to this flight
+    const flight = await flightRepository.get(flightId);
+    if (!flight) {
+        throw new AppError('Flight not found', StatusCodes.NOT_FOUND);
+    }
+    const seats = await seatRepository.getSeatsByAirplaneId(flight.airplaneId);
+    return seats;
+}
+
 module.exports = {
     createFlight,
     getAllFlights,
     getFlight,
-    updateSeats
+    updateSeats,
+    getFlightSeats
 }
